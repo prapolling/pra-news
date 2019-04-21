@@ -15,8 +15,8 @@ const createStore = () =>
       connect: [],
       allTags: [],
       gridItems: [],
-      gridNumPosts: '11',
-      gridNumCats: '11',
+      gridNumPosts: '6',
+      gridNumCats: '6',
       gridOffset: '0',
       theThumbnail: '',
       theCategory: '',
@@ -62,13 +62,14 @@ const createStore = () =>
 
       },
       setGridNumPosts({ state, commit }) {
-        if (state.blogPosts > 13) {
-          this.$store.commit("SET_GRIDNUMPOSTS", 12);
+        console.log(state.blogPosts)
+        if (state.blogPosts > 6) {
+          this.$store.commit("SET_GRIDNUMPOSTS", 6);
         }
       },
       setGridNumCats({ state, commit }) {
-        if (state.allCats > 13) {
-          this.$store.commit("SET_GRIDNUMCATS", 12);
+        if (state.allCats > 6) {
+          this.$store.commit("SET_GRIDNUMCATS", 6);
         }
       },
 

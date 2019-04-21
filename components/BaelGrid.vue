@@ -1,7 +1,7 @@
 <template>
 <div class="xs-text-6 md-text-5">
     <div v-if="items2[0]" class="masonry browse" :style="`margin-top:${navbarheight}px`">
-      <div v-for="p in items2" :key="p.pi" class="xs-p2 masonry-brick item">
+      <div v-if="items2[pi]" v-for="(p,pi) in items2" :key="p.pi" class="xs-p2 masonry-brick item">
         <h2 class="xs-my2 bold">{{p.title}}</h2>
         <div v-html="p.body"></div>
         <nuxt-link class="xs-my1 xs-text-center button button--pinterest bold" :to="p._path">
@@ -27,7 +27,6 @@ export default {
       pageNumbers: [],
       pageNumberCount: 0,
       items2: [],
-      items3: [],
       query: 1,
       busy: false,
       count: 0
@@ -35,10 +34,10 @@ export default {
   },
   methods: {
     pageCheck() {
-      if (this.allitems.length > 12) {
+      if (this.allitems.length > 6) {
         this.$store.commit("paginateOn", true);
         this.$store.commit("resultsLength", this.allitems.length);
-      } else if (this.allitems.length < 12) {
+      } else if (this.allitems.length < 6) {
         this.$store.commit("paginateOff", false);
       } else {
         this.$store.commit("paginateOff", false);
@@ -49,18 +48,16 @@ export default {
       this.count = this.offset;
       if (this.total > this.count && this.busy == false) {
         this.busy = true;
+        this.items2.splice(0);
 
-     
-          this.items2.splice(0);
-          for (var i = 0, j = 6; i < j; i++) {
-            const api = this.allitems[this.count];
+        for (var i = 0, j = 6; i < j; i++) {
+          const api = this.allitems[this.count];
 
-            this.items2.push(api);
-            this.count++;
-          }
+          this.items2.push(api);
+          this.count++;
+        }
 
-          this.busy = false;
-        
+        this.busy = false;
       }
     },
 
@@ -86,11 +83,11 @@ export default {
       } else if (this.$route.query.page == null) {
         this.$route.query.page = 1;
         this.loadMore();
-          this.navHeight();
+        this.navHeight();
         this.pageCheck();
       } else {
         this.loadMore();
-          this.navHeight();
+        this.navHeight();
         this.pageCheck();
       }
     },
@@ -102,17 +99,17 @@ export default {
 
     offset() {
       if (this.queryParam > 1) {
-        return Number(this.queryParam - 1) * 11;
+        return Number(this.queryParam - 1) * 6;
       } else {
         return 0;
       }
     },
     prevpage() {
-      var prev = Number(this.queryParam) - 1;
-      return prev;
+      const prev = Number(this.queryParam) - 1;
+      return prev <= 1 ? 1 : prev;
     },
     nextpage() {
-      var next = Number(this.queryParam) + 1;
+      const next = Number(this.queryParam) + 1;
       return next;
     },
     navbarheight() {

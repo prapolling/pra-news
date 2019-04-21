@@ -101,10 +101,8 @@
         var tp = (this.$store.state.gridNumPosts * 1) + (this.$store.state.gridOffset * 1)
         if (tp > this.$store.state.resultsnum) {
           return this.$store.state.resultsnum
-
         } else {
-          return tp
-
+          return tp;
         }
       },
       signupAboutSize: function () {
@@ -114,16 +112,16 @@
         };
       },
       prevpage() {
-        var prev = Number(this.queryParam) - 1;
-        return prev;
+        const prev = Number(this.queryParam) - 1;
+        return prev <= 1 ? 1 : prev;
       },
       totalpages() {
-        var res = this.$store.state.resultsnum;
-        var total = Math.ceil(res / 12);
+        const res = this.$store.state.resultsnum;
+        const total = Math.ceil(res / 6);
         return total;
       },
       nextpage() {
-        var next = Number(this.queryParam) + 1;
+        const next = Number(this.queryParam) + 1;
         return next;
       },
       queryParam() {
