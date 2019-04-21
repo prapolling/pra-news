@@ -19,8 +19,8 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime", format: "dddd MMMM Do, YYYY"}
       - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
       - {label: "Category", name: "category", widget: "relation", collection: "blogcategories", searchFields: ["title"], valueField: "title", displayFields: ["title"], required: false}
+      - {label: "Tags", name: "tags", widget: "relation", multiple: true, collection: "blogtags", searchFields: ["title"], valueField: "title", displayFields: ["title"], required: false }
       - {label: "Body", name: "body", widget: "markdown"}
-      - {label: "Tags", name: "tags", widget: "relation", collection: "blogtags", searchFields: ["title"], valueField: "title", displayFields: ["title"], required: false }
   - name: "page" # Used in routes, e.g., /admin/collections/blog
     label: "Pages" # Used in the UI
     folder: "content/page/posts" # The path to the folder where the documents are stored
