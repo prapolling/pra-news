@@ -1,24 +1,22 @@
 {
-  "sitename": "Bael",
-  "sitedescription": "A fashionable brutalist blog template using Netlify CMS and Nuxt.js.",
+  "sitename": "PRA News",
+  "sitedescription": "The exclusive place for Massachusetts polls and all polling related insights.",
   "siteicon": "/images/uploads/icon.png",
-  "showmenu": true,
+  "showmenu": false,
   "emailsignup": true,
-  "menu": [
-    {
-      "name": "jake101",
-      "position": "1",
-      "link": "https://www.jake101.com/"
-    },
-    {
-      "name": "Nuxt.js",
-      "position": "2",
-      "link": "https://www.nuxtjs.org/"
-    },
-    {
-      "name": "Netlify",
-      "position": "3",
-      "link": "https://www.netlify.com/"
-    }
-  ]
+  "menu": [{
+    "name": "Fake Resource (Wiki)",
+    "position": "1",
+    "link": "https://www.wikipedia.com" 
+  },
+  {
+    "name": "How To Google Things",
+    "position": "2",
+    "link": "https://www.google.com" 
+  },
+  {
+    "name": "One More Link Just Because",
+    "position": "3",
+    "link": "https://www.reddit.com" 
+  }]
 }
