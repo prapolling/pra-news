@@ -1,23 +1,19 @@
 <template>
 <div class="xs-text-6 md-text-5">
-    <div v-if="items2[0]" class="r full-height browse" :style="`height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
-
-      <div v-if="items2[pi]" v-for="(p,pi) in items2" :key="p.pi" class="xs-border xs-p2 bcg-item">
-        <div class="item xs-block xs-full-height xs-flex">
-          <nuxt-link class="xs-text-center xs-flex xs-full-height xs-flex-align-center xs-flex-justify-center xs-text-center" :to="p._path">
-            {{p.title}}
-          </nuxt-link>
-        </div>
+    <div v-if="items2[0]" class="masonry browse" :style="`margin-top:${navbarheight}px`">
+      <div v-for="p in items2" :key="p.pi" class="xs-p2 masonry-brick item">
+        <h2 class="xs-my2 bold">{{p.title}}</h2>
+        <div v-html="p.body"></div>
+        <nuxt-link class="xs-my1 xs-text-center button button--pinterest bold" :to="p._path">
+          READ MORE
+        </nuxt-link>
       </div>
 
     </div>
     <div v-else class="r full-height browse">
       <div class="xs-p2 c-100 xs-flex xs-flex-align-center xs-flex-justify-center xs-text-center" :style="`height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
-
-        
         <div v-if="total < 1 && !busy">No Results.</div>
       </div>
-
   </div>
   </div>
 </template>
@@ -31,6 +27,7 @@ export default {
       pageNumbers: [],
       pageNumberCount: 0,
       items2: [],
+      items3: [],
       query: 1,
       busy: false,
       count: 0
@@ -55,8 +52,8 @@ export default {
 
      
           this.items2.splice(0);
-          for (var i = 0, j = 12; i < j; i++) {
-            let api = this.allitems[this.count];
+          for (var i = 0, j = 6; i < j; i++) {
+            const api = this.allitems[this.count];
 
             this.items2.push(api);
             this.count++;
