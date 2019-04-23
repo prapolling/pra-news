@@ -12,7 +12,7 @@
           <div v-if="items2[pi]" class="xs-px4 item">
             <h2 class="xs-my2 bold">{{p.title}}</h2>
             <div v-html="p.body"></div>
-            <nuxt-link class="xs-my1 xs-text-right button button--transparent bold" :to="p._path">
+            <nuxt-link class="xs-my1 xs-pr5 xs-text-right button button--transparent bold" :to="p._path">
               <span class="text-red">READ MORE</span>
             </nuxt-link>
           </div>
