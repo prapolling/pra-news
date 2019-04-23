@@ -2,9 +2,9 @@
   <div class="xs-text-6 md-text-5" :style="`margin-top:${navbarheight}px`">
     <div v-if="items2[0]" class="xs-py4 table grid clearfix">
       <div class="xs-col-3 xs-float-left">
-        <div v-for="r in [1,2,3,4,5,6]" :key="r.pi">
-          <a href="https://www.wikipedia.com" target="_blank"><h3 class="xs-mb2 bold">Resource {{r}}</h3></a>
-          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        <div v-for="r in resources" :key="r.pi">
+          <a href="https://www.wikipedia.com" target="_blank"><h3 class="xs-mb2 bold">{{r.title}}</h3></a>
+          <div>{{r.body}}</div>
         </div>
       </div>
       <div class="xs-col-6 browse xs-float-left">
@@ -19,10 +19,10 @@
         </div>
       </div>
       <div class="xs-col-3 xs-float-left">
-        <div v-for="r in [1,2,3]" :key="r.pi">
-          <h3 class="xs-mb2 bold">Sweet Data {{r}}</h3>
-          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-          <img class="xs-py1" src="/images/uploads/random.png" />
+        <div v-for="s in stickyPosts" :key="s.pi">
+          <h3 class="xs-mb2 bold">{{s.title}}</h3>
+          <div>{{s.body}}</div>
+          <img class="xs-py1" src={{s.featuredImage}} />
         </div>
       </div>
     </div>
@@ -46,7 +46,9 @@
         items2: [],
         query: 1,
         busy: false,
-        count: 0
+        count: 0,
+        resources: this.$store.state.resources,
+        stickyPosts: this.$store.state.stickyPosts,
       };
     },
     methods: {

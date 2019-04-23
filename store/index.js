@@ -28,6 +28,8 @@ const createStore = () =>
       pagination: false,
       menuIsActive: false,
       menuInitial: true,
+      resources: [],
+      stickyPosts: [],
     },
     actions: {
       async nuxtServerInit({ dispatch }) {
@@ -36,6 +38,8 @@ const createStore = () =>
         await dispatch('getPages');
         await dispatch('getCats');
         await dispatch('getTags');
+        await dispatch('getResources');
+        await dispatch('getStickyPosts')
       },
       async getBlogPosts({ state, commit }) {
         const context = await require.context('~/content/blog/posts/', false, /\.json$/);
@@ -91,6 +95,26 @@ const createStore = () =>
 
         commit('SET_TAGS', pages)
       },
+      async getResources({ state, commit }) {
+        const context = await require.context('~/content/blog/posts/', false, /\.json$/);
+
+        const pages = await context.keys().map(key => ({
+          ...context(key),
+          _path: `/blog/${key.replace('.json', '').replace('./', '')}`
+        }));
+
+        commit('SET_RESOURCES', pages)
+      },
+      async getStickyPosts({ state, commit }) {
+        const context = await require.context('~/content/blog/posts/', false, /\.json$/);
+
+        const pages = await context.keys().map(key => ({
+          ...context(key),
+          _path: `/blog/${key.replace('.json', '').replace('./', '')}`
+        }));
+
+        commit('SET_STICKY_POSTS', pages)
+      },
       getSiteInfo({ state, commit }) {
         const info = require('~/content/setup/info.json');
         const connect = require('~/content/setup/connect.json');
@@ -101,12 +125,9 @@ const createStore = () =>
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
         }));
 
-
-
         commit('SET_POSTS', searchposts)
         commit('SET_INFO', info)
         commit('SET_CONNECT', connect)
-
       }
     },
     mutations: {
@@ -145,6 +166,12 @@ const createStore = () =>
       },
       SET_TITLE(state, data) {
         state.blogTitle = data
+      },
+      SET_RESOURCES(state, data) {
+        state.resources = data
+      },
+      SET_STICKY_POSTS(state, data) {
+        state.stickyPosts = data
       },
       SET_NAVHEIGHT(state, data) {
         state.navheight = data
