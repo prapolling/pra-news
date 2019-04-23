@@ -1,5 +1,3 @@
-// import webpack from 'webpack'
-
 const siteInfo = require('./content/setup/info.json');
 console.log(siteInfo)
 const glob = require('glob');
@@ -119,13 +117,6 @@ module.exports = {
     /*
      ** Run ESLint on save
      */
-
-    // plugins: [
-    //   new webpack.ProvidePlugin({
-    //     '_': 'lodash'
-    //     // ...etc.
-    //   })
-    // ]
   }
 }
 

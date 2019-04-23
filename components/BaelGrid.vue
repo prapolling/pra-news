@@ -3,13 +3,13 @@
     <div v-if="items2[0]" class="xs-py4 table grid clearfix">
       <div class="xs-col-3 xs-float-left">
         <div v-for="r in [1,2,3,4,5,6]" :key="r.pi">
-          <nuxt-link :to="`https://www.wikipedia.com`"><h3 class="xs-mb2 bold">Resource {{r}}</h3></nuxt-link>
+          <a href="https://www.wikipedia.com" target="_blank"><h3 class="xs-mb2 bold">Resource {{r}}</h3></a>
           <div>You wouldn't believe whats behind this link. It will connect you to the rest of the universe</div>
         </div>
       </div>
       <div class="xs-col-6 browse xs-float-left">
         <div v-for="(p,pi) in items2" :key="p.pi" >
-          <div v-if="items2[pi]" class="xs-px2 item">
+          <div v-if="items2[pi]" class="xs-px4 item">
             <h2 class="xs-my2 bold">{{p.title}}</h2>
             <div v-html="p.body"></div>
             <nuxt-link class="xs-my1 xs-text-right button button--transparent bold" :to="p._path">
