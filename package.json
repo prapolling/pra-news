@@ -21,6 +21,7 @@
     "bf-solid": "^2.10.6",
     "fuse.js": "^3.2.1",
     "hoek": "^4.2.1",
+    "lodash": "^4.17.11",
     "netlify-lambda": "^1.4.3",
     "node-sass": "^4.9.2",
     "nuxt": "^2.0.0",
