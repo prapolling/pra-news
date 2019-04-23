@@ -1,5 +1,5 @@
 <template>
-  <BaelGrid :allitems="allCategories"></BaelGrid>
+  <BaelGrid :allitems="allTags"></BaelGrid>
 </template>
 
 <script>
@@ -14,10 +14,7 @@
       route,
       store
     }) {
-
-      await store.commit("SET_TITLE", "Categories");
-
-
+      await store.commit("SET_TITLE", "Tags");
     },
     transition(to, from) {
       if (!from) return 'fade'
@@ -31,14 +28,13 @@
     },
     head() {
       return {
-        title: "Categories | " + this.$store.state.siteInfo.sitename
+        title: "Tags | " + this.$store.state.siteInfo.sitename
       };
     },
     computed: {
-      allCategories() {
-        return this.$store.state.allCats
+      allTags() {
+        return this.$store.state.allTags
       }
-
     }
   };
 </script>

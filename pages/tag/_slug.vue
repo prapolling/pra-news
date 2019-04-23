@@ -1,5 +1,5 @@
 <template>
-  <BaelGrid :allitems="findCatPosts"></BaelGrid>
+  <BaelGrid :allitems="findTagPosts"></BaelGrid>
 </template>
 
 <script>
@@ -12,10 +12,10 @@
       route,
       store
     }) {
-      let post = await import("~/content/categories/posts/" + params.slug + ".json");
+      const post = await import("~/content/tags/posts/" + params.slug + ".json");
       console.log(post);
       await store.commit("SET_TITLE", post.title);
-      await store.commit("SET_CRUMB", 'Categories');
+      await store.commit("SET_CRUMB", 'Tags');
       return post;
     },
     head() {
@@ -44,11 +44,13 @@
         return this.$store.state.blogPosts;
       },
 
-      findCatPosts() {
-        var posts = this.allBlogPosts;
-        var title = this.title
+      findTagPosts() {
+        const posts = this.allBlogPosts;
+        const title = this.title;
+        const slug = this.theSlug();
+
         return posts.filter(function (obj) {
-          return obj.category == title
+          return _.findIndex(obj.tags, t => _.toLower(t) === slug) > -1;
         });
       }
 

@@ -22,6 +22,7 @@ const createStore = () =>
       theCategory: '',
       theCrumb: '',
       allCats: [],
+      allTags: [],
       results: [],
       resultsnum: [],
       pagination: false,
@@ -30,10 +31,11 @@ const createStore = () =>
     },
     actions: {
       async nuxtServerInit({ dispatch }) {
-        await dispatch('getSiteInfo')
-        await dispatch('getBlogPosts')
-        await dispatch('getPages')
-        await dispatch('getCats')
+        await dispatch('getSiteInfo');
+        await dispatch('getBlogPosts');
+        await dispatch('getPages');
+        await dispatch('getCats');
+        await dispatch('getTags');
       },
       async getBlogPosts({ state, commit }) {
         const context = await require.context('~/content/blog/posts/', false, /\.json$/);
@@ -43,14 +45,10 @@ const createStore = () =>
           _path: `/blog/${key.replace('.json', '').replace('./', '')}`
         }));
 
-
-
         commit('SET_POSTS', searchposts.reverse())
-
       },
+
       async getPages({ state, commit }) {
-
-
         const context = await require.context('~/content/page/posts/', false, /\.json$/);
 
         const pages = await context.keys().map(key => ({
@@ -59,14 +57,14 @@ const createStore = () =>
         }));
 
         commit('SET_PAGES', pages)
-
       },
+
       setGridNumPosts({ state, commit }) {
-        console.log(state.blogPosts)
         if (state.blogPosts > 6) {
           this.$store.commit("SET_GRIDNUMPOSTS", 6);
         }
       },
+
       setGridNumCats({ state, commit }) {
         if (state.allCats > 6) {
           this.$store.commit("SET_GRIDNUMCATS", 6);
@@ -74,8 +72,6 @@ const createStore = () =>
       },
 
       async getCats({ state, commit }) {
-
-
         const context = await require.context('~/content/categories/posts/', false, /\.json$/);
 
         const pages = await context.keys().map(key => ({
@@ -84,20 +80,16 @@ const createStore = () =>
         }));
 
         commit('SET_CATS', pages)
-
       },
       async getTags({ state, commit }) {
-
-
         const context = await require.context('~/content/tags/posts/', false, /\.json$/);
 
         const pages = await context.keys().map(key => ({
           ...context(key),
-          _path: `/tagged/${key.replace('.json', '').replace('./', '')}`
+          _path: `/tag/${key.replace('.json', '').replace('./', '')}`
         }));
 
         commit('SET_TAGS', pages)
-
       },
       getSiteInfo({ state, commit }) {
         const info = require('~/content/setup/info.json');
