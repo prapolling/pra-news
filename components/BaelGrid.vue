@@ -22,7 +22,7 @@
         <div v-for="r in [1,2,3]" :key="r.pi">
           <h3 class="xs-mb2 bold">Sweet Data {{r}}</h3>
           <div>This crazy data from somewhere, really shows us how Massachusetts is really taking a stance on this random subject that no one knows anything about. It really is amazing what some time and money can do to sway the general population!</div>
-          <img src="/images/uploads/random.png" />
+          <img class="xs-py1" src="/images/uploads/random.png" />
         </div>
       </div>
     </div>
