@@ -4,7 +4,7 @@
       <div class="xs-col-3 xs-float-left">
         <div v-for="r in [1,2,3,4,5,6]" :key="r.pi">
           <a href="https://www.wikipedia.com" target="_blank"><h3 class="xs-mb2 bold">Resource {{r}}</h3></a>
-          <div>You wouldn't believe whats behind this link. It will connect you to the rest of the universe</div>
+          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
         </div>
       </div>
       <div class="xs-col-6 browse xs-float-left">
@@ -21,7 +21,7 @@
       <div class="xs-col-3 xs-float-left">
         <div v-for="r in [1,2,3]" :key="r.pi">
           <h3 class="xs-mb2 bold">Sweet Data {{r}}</h3>
-          <div>This crazy data from somewhere, really shows us how Massachusetts is really taking a stance on this random subject that no one knows anything about. It really is amazing what some time and money can do to sway the general population!</div>
+          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
           <img class="xs-py1" src="/images/uploads/random.png" />
         </div>
       </div>
