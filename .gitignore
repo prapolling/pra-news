@@ -13,3 +13,5 @@ dist
 # Nuxt generate
 sw.*
 
+# Not allowed
+package-lock.json
