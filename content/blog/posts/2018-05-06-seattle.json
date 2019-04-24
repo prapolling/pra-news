@@ -3,5 +3,9 @@
   "date": "Sunday May 6th, 2018",
   "thumbnail": "/images/uploads/seattle.jpg",
   "category": "Photography",
+  "flags": {
+    "resource": true,
+    "popular": false
+  },
   "body": "It was fun visiting the Museum of Pop Culture."
 }
