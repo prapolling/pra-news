@@ -103,9 +103,10 @@ const createStore = () =>
         const pages = await context.keys().reduce((acc, key) => {
           const page = context(key);
 
-          if (_.get(page, 'flags.resource', false)) {
+          if (_.get(page, 'flags.resource.active', false)) {
             acc.push({
               ...context(key),
+              description: _.get(page, 'flags.resource.description', ""),
               _path: `/blog/${key.replace('.json', '').replace('./', '')}`
             });
           }
@@ -113,7 +114,7 @@ const createStore = () =>
           return acc;
         }, []);
 
-        commit('SET_RESOURCES', pages)
+        commit('SET_RESOURCES', pages.reverse())
       },
       async getPopular({ state, commit }) {
         const context = await require.context('~/content/blog/posts/', false, /\.json$/);
@@ -131,7 +132,7 @@ const createStore = () =>
           return acc;
         }, []);
 
-        commit('SET_STICKY_POSTS', pages)
+        commit('SET_STICKY_POSTS', pages.reverse())
       },
       getSiteInfo({ state, commit }) {
         const info = require('~/content/setup/info.json');

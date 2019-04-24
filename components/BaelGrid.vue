@@ -7,7 +7,8 @@
           <nuxt-link :to="r._path">
             <h3 class="xs-mb2 bold">{{r.title}}</h3>
           </nuxt-link>
-          <div v-html="r.body"></div>
+          <div v-if="r.description" v-html="r.description"></div>
+          <div v-else v-html="r.body"></div>
         </div>
       </div>
       <div class="xs-col-6 xs-px4 browse xs-float-left">

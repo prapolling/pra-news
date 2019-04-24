@@ -4,7 +4,10 @@
   "thumbnail": "/images/uploads/seattle.jpg",
   "category": "Photography",
   "flags": {
-    "resource": true,
+    "resource": {
+      "active": true,
+      "description": "It was fun visiting the Museum of Pop Culture. Lorem Ipsum to 10 char the rest of this description"
+    },
     "popular": false
   },
   "body": "It was fun visiting the Museum of Pop Culture."

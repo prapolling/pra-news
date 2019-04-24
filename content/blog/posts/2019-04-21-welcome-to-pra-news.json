@@ -7,5 +7,12 @@
   "tags": [
     "Data"
   ],
+  "flags": {
+    "resource": {
+      "active": false,
+      "description": ""
+    },
+    "popular": true
+  },
   "body": "Princeton Review Associates is glad to have finally launched our website. We look forward to sharing all of our insights and knowledge with you, the reader. Stay tuned for excellent polling related news and updates."
 }
