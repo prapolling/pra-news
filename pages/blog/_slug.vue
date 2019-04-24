@@ -25,7 +25,7 @@
           </no-ssr>
           <div class="xs-py3 post-content text-gray-lighter">
             <div v-html="$md.render(body)"></div>
-            <ul class="list-unstyled xs-flex xs-flex-align-center">
+            <ul v-if="tags" class="list-unstyled xs-flex xs-flex-align-center">
               <li class="xs-inline-block xs-mr1" v-for="t of tags" :key="t.pi">
                 <div class="tag fill-gray-darker xs-border">
                   <nuxt-link :to="`/tag/${t.toLowerCase()}`" class="tag__link text-white">

@@ -2,27 +2,32 @@
   <div class="xs-text-6 md-text-5" :style="`margin-top:${navbarheight}px`">
     <div v-if="items2[0]" class="xs-py4 table grid clearfix">
       <div class="xs-col-3 xs-float-left">
-        <div v-for="r in [1,2,3,4,5,6]" :key="r.pi">
-          <a href="https://www.wikipedia.com" target="_blank"><h3 class="xs-mb2 bold">Resource {{r}}</h3></a>
-          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        <Title text="Resources" />
+        <div v-for="r in resources" :key="r.pi">
+          <nuxt-link :to="r._path">
+            <h3 class="xs-mb2 bold">{{r.title}}</h3>
+          </nuxt-link>
+          <div>{{r.body}}</div>
         </div>
       </div>
-      <div class="xs-col-6 browse xs-float-left">
+      <div class="xs-col-6 xs-px4 browse xs-float-left">
+        <Title text="Recent Posts" />
         <div v-for="(p,pi) in items2" :key="p.pi" >
-          <div v-if="items2[pi]" class="xs-px4 item">
+          <div v-if="items2[pi]" class="item">
             <h2 class="xs-my2 bold">{{p.title}}</h2>
             <div v-html="p.body"></div>
-            <nuxt-link class="xs-my1 xs-pr5 xs-text-right button button--transparent bold" :to="p._path">
+            <nuxt-link class="xs-my1 xs-pr4 xs-text-right button button--transparent bold" :to="p._path">
               <span class="text-red">READ MORE</span>
             </nuxt-link>
           </div>
         </div>
       </div>
       <div class="xs-col-3 xs-float-left">
-        <div v-for="r in [1,2,3]" :key="r.pi">
-          <h3 class="xs-mb2 bold">Sweet Data {{r}}</h3>
-          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-          <img class="xs-py1" src="/images/uploads/random.png" />
+        <Title text="Popular" />
+        <div v-for="s in stickyPosts" :key="s.pi">
+          <h3 class="xs-mb2 bold">{{s.title}}</h3>
+          <div>{{s.body}}</div>
+          <img v-if="s.featuredImage" class="xs-py1" :src="`${s.featuredImage}`" />
         </div>
       </div>
     </div>
@@ -36,6 +41,7 @@
 </template>
 
 <script>
+  import Title from '~/components/Title'
   export default {
     props: ["items", "allitems"],
     data() {
@@ -46,8 +52,13 @@
         items2: [],
         query: 1,
         busy: false,
-        count: 0
+        count: 0,
+        resources: this.$store.state.resources,
+        stickyPosts: this.$store.state.stickyPosts,
       };
+    },
+    components: {
+      Title
     },
     methods: {
       pageCheck() {
@@ -174,9 +185,9 @@
 </script>
 
 <style>
-.grid {
-  width: 1200px;
-  max-width: 100%;
-  margin: 0 auto;
-}
+  .grid {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
 </style>
