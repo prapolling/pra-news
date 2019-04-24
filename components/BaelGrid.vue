@@ -16,7 +16,7 @@
           <div v-if="items2[pi]" class="item">
             <h2 class="xs-my2 bold">{{p.title}}</h2>
             <div v-html="p.body"></div>
-            <nuxt-link class="xs-my1 xs-pr5 xs-text-right button button--transparent bold" :to="p._path">
+            <nuxt-link class="xs-my1 xs-pr4 xs-text-right button button--transparent bold" :to="p._path">
               <span class="text-red">READ MORE</span>
             </nuxt-link>
           </div>
@@ -185,9 +185,9 @@
 </script>
 
 <style>
-.grid {
-  width: 1200px;
-  max-width: 100%;
-  margin: 0 auto;
-}
+  .grid {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
 </style>
