@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0dce1756-d04c-45cc-93d2-c6ae9670d767/deploy-status)](https://app.netlify.com/sites/kind-ramanujan-14866d/deploys)
+
 # Bael Netlify CMS Template
 
 ![Bael](https://i.imgur.com/e1zmiB2.jpg "Bael CMS Blog Template")
@@ -7,10 +9,6 @@
 ## Info
 
 Bael runs using [Nuxt.js](https://nuxtjs.org), [Vue.js](https://vuejs.org), [Netlify CMS](https://netlifycms.org), and is hosted by [Netlify](https://netlify.com). Bael requires an account with Netlify and Github/Bitbucket to deploy. Made by [Jake 101](https://jake101.com)
-
-## Deploy to Netlify
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jake-101/bael-template)
 
 
 ## Build Setup
