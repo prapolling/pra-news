@@ -24,7 +24,7 @@
       </div>
       <div class="xs-col-3 xs-float-left">
         <Title text="Popular" />
-        <div v-for="s in stickyPosts" :key="s.pi">
+        <div v-for="s in popular" :key="s.pi">
           <h3 class="xs-mb2 bold">{{s.title}}</h3>
           <div>{{s.body}}</div>
           <img v-if="s.featuredImage" class="xs-py1" :src="`${s.featuredImage}`" />
@@ -54,7 +54,7 @@
         busy: false,
         count: 0,
         resources: this.$store.state.resources,
-        stickyPosts: this.$store.state.stickyPosts,
+        popular: this.$store.state.popular,
       };
     },
     components: {

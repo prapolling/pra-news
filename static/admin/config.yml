@@ -23,8 +23,8 @@ collections:
         name: "flags"
         widget: "object"
         fields:
-            - {label: "Resource Post", name: "resource", widget: "boolean", default: false}
-            - {label: "Sticky Post", name: sticky, widget: "boolean", default: false}
+            - {label: "Resource", name: "resource", widget: "boolean", default: false}
+            - {label: "Popular", name: popular, widget: "boolean", default: false}
       - {label: "Body", name: "body", widget: "markdown"}
   - name: "page" # Used in routes, e.g., /admin/collections/blog
     label: "Pages" # Used in the UI

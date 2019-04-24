@@ -1,5 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import _ from 'lodash';
+
 Vue.use(Vuex)
 
 const createStore = () =>
@@ -29,7 +31,7 @@ const createStore = () =>
       menuIsActive: false,
       menuInitial: true,
       resources: [],
-      stickyPosts: [],
+      popular: [],
     },
     actions: {
       async nuxtServerInit({ dispatch }) {
@@ -39,7 +41,7 @@ const createStore = () =>
         await dispatch('getCats');
         await dispatch('getTags');
         await dispatch('getResources');
-        await dispatch('getStickyPosts')
+        await dispatch('getPopular')
       },
       async getBlogPosts({ state, commit }) {
         const context = await require.context('~/content/blog/posts/', false, /\.json$/);
@@ -98,20 +100,36 @@ const createStore = () =>
       async getResources({ state, commit }) {
         const context = await require.context('~/content/blog/posts/', false, /\.json$/);
 
-        const pages = await context.keys().map(key => ({
-          ...context(key),
-          _path: `/blog/${key.replace('.json', '').replace('./', '')}`
-        }));
+        const pages = await context.keys().reduce((acc, key) => {
+          const page = context(key);
+
+          if (_.get(page, 'flags.resource', false)) {
+            acc.push({
+              ...context(key),
+              _path: `/blog/${key.replace('.json', '').replace('./', '')}`
+            });
+          }
+
+          return acc;
+        }, []);
 
         commit('SET_RESOURCES', pages)
       },
-      async getStickyPosts({ state, commit }) {
+      async getPopular({ state, commit }) {
         const context = await require.context('~/content/blog/posts/', false, /\.json$/);
 
-        const pages = await context.keys().map(key => ({
-          ...context(key),
-          _path: `/blog/${key.replace('.json', '').replace('./', '')}`
-        }));
+        const pages = await context.keys().reduce((acc, key) => {
+          const page = context(key);
+
+          if (_.get(page, 'flags.popular', false)) {
+            acc.push({
+              ...context(key),
+              _path: `/blog/${key.replace('.json', '').replace('./', '')}`
+            });
+          }
+
+          return acc;
+        }, []);
 
         commit('SET_STICKY_POSTS', pages)
       },
@@ -171,7 +189,7 @@ const createStore = () =>
         state.resources = data
       },
       SET_STICKY_POSTS(state, data) {
-        state.stickyPosts = data
+        state.popular = data
       },
       SET_NAVHEIGHT(state, data) {
         state.navheight = data
