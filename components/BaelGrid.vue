@@ -3,7 +3,7 @@
     <div v-if="items2[0]" class="xs-py4 table grid clearfix">
       <div class="xs-col-3 xs-float-left">
         <Title text="Resources" />
-        <div class="xs-pr6" v-for="r in resources" :key="r.pi">
+        <div class="xs-pr4" v-for="r in resources" :key="r.pi">
           <nuxt-link :to="r._path">
             <h3 class="xs-mb2 bold">{{r.title}}</h3>
           </nuxt-link>
