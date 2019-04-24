@@ -1,7 +1,6 @@
 <template>
   <footer class="fill-gray-lighter xs-text-6 md-text-5">
     <div class="r no-gap">
-
       <div class="c-12 xs-text-left xs-p2 xs-border">
         <div class="item xs-text-center">
           <div v-if="pagination" class="xs-flex xs-flex-justify-center xs-flex-align-center">
