@@ -1,3 +1,7 @@
+* {
+  font-family: 'Roboto';
+}
+
 .r {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -107,6 +111,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: 'Poppins';
   margin-top: 1rem;
 }
 
