@@ -1,9 +1,9 @@
 <template>
   <div class="xs-text-6 md-text-5" :style="`margin-top:${navbarheight}px`">
     <div v-if="items2[0]" class="xs-py4 table grid clearfix">
-      <div class="xs-col-3 xs-float-left">
+      <div class="grid-resource">
         <Title text="Resources" />
-        <div class="xs-pr4" v-for="r in resources" :key="r.pi">
+        <div class="xs-pr4" v-for="r in resources" :key="r._path">
           <nuxt-link :to="r._path">
             <h3 class="xs-mb2 bold">{{r.title}}</h3>
           </nuxt-link>
@@ -11,9 +11,9 @@
           <div v-else v-html="r.body"></div>
         </div>
       </div>
-      <div class="xs-col-6 xs-px4 browse xs-float-left">
+      <div class="xs-px4 browse grid-recent">
         <Title text="Recent Posts" />
-        <div v-for="(p,pi) in items2" :key="p.pi" >
+        <div v-if="items2[pi]" v-for="(p,pi) in items2" :key="p._path" >
           <div v-if="items2[pi]" class="item">
             <h2 class="xs-my2 bold">{{p.title}}</h2>
             <div v-html="p.body"></div>
@@ -23,9 +23,9 @@
           </div>
         </div>
       </div>
-      <div class="xs-col-3 xs-float-left">
+      <div class="grid-popular">
         <Title text="Popular" />
-        <div v-for="s in popular" :key="s.pi">
+        <div v-for="s in popular" :key="s._path">
           <h3 class="xs-mb2 bold">{{s.title}}</h3>
           <div v-html="s.body"></div>
           <img v-if="s.featuredImage" class="xs-py1" :src="`${s.featuredImage}`" />
@@ -190,5 +190,44 @@
     width: 1200px;
     max-width: 100%;
     margin: 0 auto;
+    display: grid !important;
+    grid-template-areas: 'resource recent popular';
+    grid-gap: 0;
+    align-items: start;
+    grid-template-columns: 25% auto 25%;
+  }
+
+  .grid-resource {
+    grid-area: resource;
+  }
+
+  .grid-recent {
+    grid-area: recent;
+  }
+
+  .grid-popular {
+    grid-area: popular;
+  }
+
+  @media only screen and (max-width: 80rem) {
+    .grid {
+      grid-template-areas: 'resource recent' 'popular popular';
+      grid-template-columns: 33% auto;
+    }
+
+    .grid-resource {
+      padding-left: 2rem;
+    }
+
+    .grid-popular {
+      padding: 0 2rem;
+    }
+  }
+
+  @media only screen and (max-width: 40rem) {
+    .grid {
+      grid-template-areas: 'recent' 'popular' 'resource';
+      grid-template-columns: 100%;
+    }
   }
 </style>
