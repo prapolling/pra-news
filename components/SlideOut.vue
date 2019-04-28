@@ -24,10 +24,10 @@
         <nuxt-link :to="pg._path">{{pg.title}}</nuxt-link>
       </li>
       <li v-if="menuLinks" class="xs-mt5 zap-slideout-menu-item black-font">
-        Links
+        Resources
       </li>
-      <li v-if="menuLinks" v-for="m in menuLinks" :key="m.position" class="zap-slideout-menu-item--small">
-        <a :href="m.link">{{m.name}}</a>
+      <li v-if="menuLinks[index]" v-for="(m, index) in menuLinks" :key="m.title" class="zap-slideout-menu-item--small">
+        <a :href="m.link">{{m.title}}</a>
       </li>
     </ul>
   </div>
@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     menuLinks() {
-      return this.$store.state.siteInfo.menu;
+      return this.$store.state.resources;
     },
     myPages() {
       return this.$store.state.allPages;
@@ -234,5 +234,11 @@ export default {
 /* The famed Zap agency logo (TM) */
 .zap-emoji {
   height: 120px;
+}
+
+@media only screen and (max-width: 60rem) {
+  .zap-slideout {
+    width: 50vw;
+  }
 }
 </style>
