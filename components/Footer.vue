@@ -38,15 +38,15 @@
       </div>
       <div v-if="signupBoolean" class="c-4 xs-text-left xs-p2 xs-border">
         <div v-if="!sent" class="item">
-          <div class="footer__heading xs-mb2">Newsletter Signup</div>
+          <div class="footer__heading xs-mb2">Contact Us</div>
           <form @submit.prevent="processForm" action="/.netlify/functions/app" name="mailinglist">
             <input type="email" v-model="emaildata.email" class="text-input text-input--small xs-mb1 xs-mr2"
-              placeholder="you@email.com">
+              placeholder="your@email.com">
             <button type="submit" class="button button--small">Submit</button>
           </form>
         </div>
         <div class="item" v-else>
-          <div class="xs-mb2">{{emaildata.email}} has been added to our newsletter.</div>
+          <div class="xs-mb2">We will reach out to {{emaildata.email}} as soon as possible.</div>
         </div>
       </div>
       <div class="c-4 xs-text-left xs-p2 xs-border" :class="signupAboutSize">
