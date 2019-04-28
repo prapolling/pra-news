@@ -1,9 +1,11 @@
 <template>
-  <BaelGrid :allitems="findTagPosts"></BaelGrid>
+  <Grid :allitems="findTagPosts" :type="title"></Grid>
 </template>
 
 <script>
-  import BaelGrid from '~/components/BaelGrid'
+  import _ from 'lodash';
+  import Grid from '~/components/Grid';
+
   export default {
     async asyncData({
       params,
@@ -24,7 +26,7 @@
       };
     },
     components: {
-      BaelGrid
+      Grid
     },
     transition(to, from) {
       if (!from) return 'slide-right'

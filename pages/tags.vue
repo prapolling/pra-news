@@ -1,9 +1,9 @@
 <template>
-  <BaelGrid :allitems="allTags"></BaelGrid>
+  <SmallGrid :items="allTags" name="Tags"></SmallGrid>
 </template>
 
 <script>
-  import BaelGrid from '~/components/BaelGrid'
+  import SmallGrid from '~/components/SmallGrid'
   export default {
     watchQuery: ['page'],
 
@@ -21,7 +21,7 @@
       return +to.query.page > +from.query.page ? 'slide-right' : 'slide-left'
     },
     components: {
-      BaelGrid
+      SmallGrid
     },
     data() {
       return {};

@@ -1,52 +1,39 @@
 <template>
-  <div class="xs-text-6 md-text-5" :style="`margin-top:${navbarheight}px`">
-    <div v-if="items2[0]" class="xs-py4 table grid clearfix">
-      <div class="grid-resource">
-        <Title text="Resources" />
-        <div class="xs-pr4" v-for="r in resources" :key="r._path">
-          <nuxt-link :to="r._path">
-            <h3 class="xs-mb2 bold">{{r.title}}</h3>
+  <div class='xs-text-6 md-text-5' :style='`margin-top:${navbarheight}px`'>
+    <div v-if='items2[0]' class='xs-py4 table grid clearfix'>
+      <Resources />
+      <div class='xs-px4 browse grid-recent'>
+        <Title :text='`Recent${type ? ` ${type} ` : ` `}Posts`' />
+        <div v-if='items2[pi]' v-for='(p,pi) in items2' :key='p._path' class='item' >
+          <h2 class='xs-my2 bold'>{{p.title}}</h2>
+          <div v-html='items2[pi].blurb'></div>
+          <nuxt-link class='xs-my1 xs-pr2 xs-text-right button button--transparent' :to='p._path'>
+            <h4 class='text-red bold'>READ MORE</h4>
           </nuxt-link>
-          <div v-if="r.description" v-html="r.description"></div>
-          <div v-else v-html="r.body"></div>
         </div>
       </div>
-      <div class="xs-px4 browse grid-recent">
-        <Title text="Recent Posts" />
-        <div v-if="items2[pi]" v-for="(p,pi) in items2" :key="p._path" >
-          <div v-if="items2[pi]" class="item">
-            <h2 class="xs-my2 bold">{{p.title}}</h2>
-            <div v-html="items2[pi].blurb"></div>
-            <nuxt-link class="xs-my1 xs-pr4 xs-text-right button button--transparent bold" :to="p._path">
-              <span class="text-red">READ MORE</span>
-            </nuxt-link>
-          </div>
-        </div>
-      </div>
-      <div class="grid-popular">
-        <Title text="Popular" />
-        <div v-for="s in popular" :key="s._path">
-          <h3 class="xs-mb2 bold">{{s.title}}</h3>
-          <div v-html="s.body"></div>
-          <img v-if="s.featuredImage" class="xs-py1" :src="`${s.featuredImage}`" />
-        </div>
-      </div>
+      <Popular />
     </div>
-    <div v-else class="r full-height browse">
-      <div class="xs-p2 c-100 xs-flex xs-flex-align-center xs-flex-justify-center xs-text-center"
-        :style="`height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`">
-        <div v-if="total < 1 && !busy">No Results.</div>
+    <div v-else class='r full-height browse'>
+      <div class='xs-p2 c-100 xs-flex xs-flex-align-center xs-flex-justify-center xs-text-center'
+        :style='`height:calc(100vh - ${navbarheight}px);margin-top:${navbarheight}px`'>
+        <div v-if='total < 1 && !busy'>No Results.</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Title from '~/components/Title';
+  import _ from 'lodash';
   import remark from 'remark';
   import strip from 'strip-markdown';
+
+  import Popular from '~/components/Popular';
+  import Resources from '~/components/Resources';
+  import Title from '~/components/Title';
+
   export default {
-    props: ["items", "allitems"],
+    props: ['items', 'allitems', 'type'],
     data() {
       return {
         currentPage: null,
@@ -56,22 +43,22 @@
         query: 1,
         busy: false,
         count: 0,
-        resources: this.$store.state.resources,
-        popular: this.$store.state.popular,
       };
     },
     components: {
-      Title
+      Popular,
+      Resources,
+      Title,
     },
     methods: {
       pageCheck() {
         if (this.allitems.length > 6) {
-          this.$store.commit("paginateOn", true);
-          this.$store.commit("resultsLength", this.allitems.length);
+          this.$store.commit('paginateOn', true);
+          this.$store.commit('resultsLength', this.allitems.length);
         } else if (this.allitems.length < 6) {
-          this.$store.commit("paginateOff", false);
+          this.$store.commit('paginateOff', false);
         } else {
-          this.$store.commit("paginateOff", false);
+          this.$store.commit('paginateOff', false);
         }
       },
 
@@ -79,12 +66,15 @@
         this.count = this.offset;
         if (this.total > this.count && this.busy == false) {
           this.busy = true;
-          const newItems = [...this.items2].splice(0);
 
+          const newItems = [];
           for (var i = 0, j = 6; i < j; i++) {
             const api = this.allitems[this.count];
 
-            newItems.push(api);
+            if (api) {
+              newItems.push(api);
+            }
+            
             this.count++;
           }
 
@@ -104,7 +94,6 @@
               );
             })
           ).then(items2 => {
-            console.log(items2)
             this.items2 = items2;
             this.busy = false;
           });
@@ -117,9 +106,9 @@
 
       navHeight() {
         if (process.browser) {
-          var height = document.getElementById("navbar").clientHeight;
+          var height = document.getElementById('navbar').clientHeight;
 
-          this.$store.commit("SET_NAVHEIGHT", height - 1);
+          this.$store.commit('SET_NAVHEIGHT', height - 1);
         }
       }
     },
@@ -184,7 +173,7 @@
       this.$nextTick(() => {
         this.pageCheck();
         this.navHeight();
-        this.$store.commit("SET_GRIDOFFSET", this.offset);
+        this.$store.commit('SET_GRIDOFFSET', this.offset);
       });
     },
     mounted() {
@@ -194,13 +183,13 @@
         this.$nextTick(() => {
           this.navHeight();
           this.pageCheck();
-          window.addEventListener("resize", this.onResize);
+          window.addEventListener('resize', this.onResize);
         });
       }
     },
     beforeDestroy() {
       // Unregister the event listener before destroying this Vue instance
-      window.removeEventListener("resize", this.onResize);
+      window.removeEventListener('resize', this.onResize);
     }
   };
 </script>

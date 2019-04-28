@@ -1,16 +1,16 @@
 <template>
   <section class="container xs-border xs-text-5 md-text-4">
-    <BaelHeader :blogtitle="blogtitle" :thecrumb="this.$store.state.theCrumb" :posts="blogposts" />
+    <Header :blogtitle="blogtitle" :thecrumb="this.$store.state.theCrumb" :posts="blogposts" />
     <nuxt />
     <SlideOut />
-    <BaelFooter :pagination="paginate" />
+    <Footer :pagination="paginate" />
   </section>
 </template>
 
 <script>
   import SlideOut from "~/components/SlideOut";
-  import BaelFooter from "~/components/BaelFooter";
-  import BaelHeader from "~/components/BaelHeader";
+  import Footer from "~/components/Footer";
+  import Header from "~/components/Header";
 
   export default {
     data() {
@@ -61,8 +61,8 @@
     },
     components: {
       SlideOut,
-      BaelHeader,
-      BaelFooter
+      Header,
+      Footer
     }
   };
 </script>

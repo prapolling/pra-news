@@ -95,6 +95,8 @@
     padding-left: 0;
     transform: translateY(17px);
     width: 30vw;
+    box-shadow: 0 5px 7px -6px;
+    z-index: 56;
   }
 
   .results li {

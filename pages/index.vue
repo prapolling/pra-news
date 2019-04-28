@@ -1,9 +1,9 @@
 <template>
-  <BaelGrid :allitems="allBlogPosts"></BaelGrid>
+  <Grid :allitems="allBlogPosts"></Grid>
 </template>
 
 <script>
-  import BaelGrid from "~/components/BaelGrid";
+  import Grid from "~/components/Grid";
   export default {
     watchQuery: ['page'],
 
@@ -14,7 +14,7 @@
     },
     name: "Index",
     components: {
-      BaelGrid
+      Grid
     },
     data() {
       return {};

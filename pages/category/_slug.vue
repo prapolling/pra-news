@@ -1,9 +1,9 @@
 <template>
-  <BaelGrid :allitems="findCatPosts"></BaelGrid>
+  <Grid :allitems="findCatPosts" :type="title"></Grid>
 </template>
 
 <script>
-  import BaelGrid from '~/components/BaelGrid'
+  import Grid from '~/components/Grid'
   export default {
     async asyncData({
       params,
@@ -24,7 +24,7 @@
       };
     },
     components: {
-      BaelGrid
+      Grid
     },
     transition(to, from) {
       if (!from) return 'slide-right'
@@ -45,8 +45,9 @@
       },
 
       findCatPosts() {
-        var posts = this.allBlogPosts;
-        var title = this.title
+        const posts = this.allBlogPosts;
+        const title = this.title
+
         return posts.filter(function (obj) {
           return obj.category == title
         });

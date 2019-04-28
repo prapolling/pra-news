@@ -1,9 +1,9 @@
 <template>
-  <BaelGrid :allitems="allCategories"></BaelGrid>
+  <SmallGrid :items="allCategories" name="Categories"></SmallGrid>
 </template>
 
 <script>
-  import BaelGrid from '~/components/BaelGrid'
+  import SmallGrid from '~/components/SmallGrid'
   export default {
     watchQuery: ['page'],
 
@@ -14,17 +14,14 @@
       route,
       store
     }) {
-
       await store.commit("SET_TITLE", "Categories");
-
-
     },
     transition(to, from) {
       if (!from) return 'fade'
       return +to.query.page > +from.query.page ? 'slide-right' : 'slide-left'
     },
     components: {
-      BaelGrid
+      SmallGrid
     },
     data() {
       return {};
@@ -36,9 +33,9 @@
     },
     computed: {
       allCategories() {
+        console.log('HERE')
         return this.$store.state.allCats
       }
-
     }
   };
 </script>

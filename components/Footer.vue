@@ -9,7 +9,7 @@
             </span>
             <div class="pagination">
               <nuxt-link :to="`?page=${prevpage}`" tag="button"
-                :class="{ 'pagination__button--disabled': this.prevpage <= 0 }"
+                :class="{ 'pagination__button--disabled': prevpage <= 1 }"
                 class="pagination__button pagination__button--prev">
                 <svg class="pagination__button--prev-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -17,7 +17,7 @@
                 </svg>
               </nuxt-link>
               <nuxt-link :to="`?page=${nextpage}`" no-prefetch tag="button"
-                :class="{ 'pagination__button--disabled': this.queryParam >= this.totalpages }"
+                :class="{ 'pagination__button--disabled': queryParam >= totalpages }"
                 class="pagination__button pagination__button--next">
                 <svg class="pagination__button--next-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -112,6 +112,7 @@
       },
       prevpage() {
         const prev = Number(this.queryParam) - 1;
+        console.log(prev)
         return prev <= 1 ? 1 : prev;
       },
       totalpages() {
@@ -121,7 +122,7 @@
       },
       nextpage() {
         const next = Number(this.queryParam) + 1;
-        return next;
+        return next > this.totalpages ? this.totalpages : next;
       },
       queryParam() {
         if (this.$route.query.page == null) {
