@@ -25,7 +25,8 @@
           </no-ssr>
           <div class="xs-py3 post-content text-gray-lighter">
             <div v-html="$md.render(body)"></div>
-            <ul v-if="tags" class="list-unstyled xs-flex xs-flex-align-center">
+            <Title text="Tags" size="small" />
+            <ul v-if="tags" class="list-unstyled xs-mt2 xs-flex xs-flex-align-center">
               <li class="xs-inline-block xs-mr1" v-for="t of tags" :key="t.pi">
                 <div class="tag fill-gray-darker xs-border">
                   <nuxt-link :to="`/tag/${t.toLowerCase()}`" class="tag__link text-white">
@@ -37,7 +38,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </main>
 </template>
@@ -46,6 +46,7 @@
 
 <script>
   import MdWrapper from "~/components/MdWrapper";
+  import Title from '~/components/Title';
 
   export default {
     async asyncData({
@@ -128,7 +129,8 @@
       }
     },
     components: {
-      MdWrapper
+      MdWrapper,
+      Title,
     }
   };
 </script>
