@@ -1,11 +1,10 @@
 <template>
-
   <BaelGrid :allitems="allBlogPosts"></BaelGrid>
 </template>
 
 <script>
   import BaelGrid from "~/components/BaelGrid";
-
+  import { attachBlurbs } from '~/utilities/blurbs';
   export default {
     watchQuery: ['page'],
 

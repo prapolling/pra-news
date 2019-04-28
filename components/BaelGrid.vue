@@ -16,7 +16,7 @@
         <div v-if="items2[pi]" v-for="(p,pi) in items2" :key="p._path" >
           <div v-if="items2[pi]" class="item">
             <h2 class="xs-my2 bold">{{p.title}}</h2>
-            <div v-html="p.body"></div>
+            <div v-html="items2[pi].blurb"></div>
             <nuxt-link class="xs-my1 xs-pr4 xs-text-right button button--transparent bold" :to="p._path">
               <span class="text-red">READ MORE</span>
             </nuxt-link>
@@ -42,7 +42,9 @@
 </template>
 
 <script>
-  import Title from '~/components/Title'
+  import Title from '~/components/Title';
+  import remark from 'remark';
+  import strip from 'strip-markdown';
   export default {
     props: ["items", "allitems"],
     data() {
@@ -77,16 +79,35 @@
         this.count = this.offset;
         if (this.total > this.count && this.busy == false) {
           this.busy = true;
-          this.items2.splice(0);
+          const newItems = [...this.items2].splice(0);
 
           for (var i = 0, j = 6; i < j; i++) {
             const api = this.allitems[this.count];
 
-            this.items2.push(api);
+            newItems.push(api);
             this.count++;
           }
 
-          this.busy = false;
+          Promise.all(
+            _.map(newItems, item => {
+              return (
+                remark()
+                  .use(strip)
+                  .process(item.body)
+                  .then(stripped => {
+                    const blurb = stripped.contents.length > 497
+                      ? `${stripped.contents.substr(0, 497)}...`
+                      : stripped.contents;
+
+                    return { ...item, blurb };
+                  })
+              );
+            })
+          ).then(items2 => {
+            console.log(items2)
+            this.items2 = items2;
+            this.busy = false;
+          });
         }
       },
 
@@ -128,7 +149,6 @@
       }
     },
     computed: {
-
       offset() {
         if (this.queryParam > 1) {
           return Number(this.queryParam - 1) * 6;
@@ -224,7 +244,7 @@
     }
   }
 
-  @media only screen and (max-width: 40rem) {
+  @media only screen and (max-width: 60rem) {
     .grid {
       grid-template-areas: 'recent' 'popular' 'resource';
       grid-template-columns: 100%;
