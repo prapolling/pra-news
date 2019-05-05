@@ -1,0 +1,12 @@
+{
+  "title": "Gaming",
+  "date": "Sunday May 5th, 2019",
+  "flags": {
+    "resource": {
+      "active": false,
+      "description": "Gaming"
+    },
+    "popular": false
+  },
+  "body": "![](/images/uploads/gaming_001.png \"Gaming\")"
+}
