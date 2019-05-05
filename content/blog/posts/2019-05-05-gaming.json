@@ -1,6 +1,9 @@
 {
   "title": "Gaming",
   "date": "Sunday May 5th, 2019",
+  "tags": [
+    "Resource"
+  ],
   "flags": {
     "resource": {
       "active": false,
