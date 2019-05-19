@@ -2,7 +2,10 @@
   "title": "Immigration",
   "date": "Thursday March 28th, 2019",
   "thumbnail": "/images/uploads/usa-flag-america.jpg",
-  "category": "Setup",
+  "category": "Design",
+  "tags": [
+    "Resource"
+  ],
   "flags": {
     "resource": {
       "active": false,
