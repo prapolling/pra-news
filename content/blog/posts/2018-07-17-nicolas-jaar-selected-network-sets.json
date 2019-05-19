@@ -6,7 +6,7 @@
   "flags": {
     "resource": {
       "active": true,
-      "description": "FAVORABILITY"
+      "description": "RECENT FAVORABILITY NUMBERS"
     },
     "popular": false
   },
